@@ -10,18 +10,31 @@ class Array
 
     self
   end
-  return_value = [1, 2, 3].my_each do |num|
-    puts num
-  end.my_each do |num|
-    puts num
+  # return_value = [1, 2, 3].my_each do |num|
+  #   puts num
+  # end.my_each do |num|
+  #   puts num
+  # end
+  # # => 1
+  #      2
+  #      3
+  #      1
+  #      2
+  #      3
+  #
+  # p return_value  # => [1, 2, 3]
+
+
+
+  def my_select(&prc)
+    arr = []
+    self.my_each do |select|
+      arr << select if prc.call(select)
+    end
+    arr
   end
-  # => 1
-       2
-       3
-       1
-       2
-       3
 
-  p return_value  # => [1, 2, 3]
-
+  a = [1, 2, 3]
+p a.my_select { |num| num > 1 } # => [2, 3]
+p a.my_select { |num| num == 4 } # => []
 end
